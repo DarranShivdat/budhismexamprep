@@ -520,27 +520,129 @@
   .term-tip-card strong { color: var(--gold); font-weight: 500; }
 
   /* TEXTS */
-  .texts-grid { display: grid; gap: 8px; }
+  .texts-grid { display: grid; gap: 10px; }
 
   .text-card {
     background: var(--bg2);
     border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s;
   }
+
+  .text-card:hover { border-color: var(--border-strong); }
+  .text-card.open { border-color: rgba(138,106,42,0.5); }
+
+  .text-card-header {
+    padding: 1.1rem 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .text-card-left { flex: 1; }
 
   .text-title {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1rem;
-    font-weight: 500;
-    color: var(--cream);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--gold);
     font-style: italic;
+    margin-bottom: 3px;
   }
 
-  .text-meta { font-size: 11.5px; color: var(--text-muted); }
+  .text-meta { font-size: 11.5px; color: var(--text-muted); margin-bottom: 5px; }
+
+  .text-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 6px;
+  }
+
+  .text-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    padding: 2px 8px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: var(--bg);
+  }
+
+  .text-chevron {
+    font-size: 11px;
+    color: var(--text-faint);
+    transition: transform 0.2s;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  .text-card.open .text-chevron { transform: rotate(180deg); }
+
+  .text-card-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 1.25rem;
+  }
+
+  .text-card.open .text-card-body { display: block; }
+
+  .text-section {
+    margin-bottom: 1.1rem;
+  }
+
+  .text-section:last-child { margin-bottom: 0; }
+
+  .text-section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 6px;
+  }
+
+  .text-section-body {
+    font-size: 12.5px;
+    color: var(--cream-dim);
+    line-height: 1.7;
+  }
+
+  .text-section-body ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .text-section-body ul li {
+    padding: 3px 0 3px 1.1rem;
+    position: relative;
+  }
+
+  .text-section-body ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold-dim);
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    top: 5px;
+  }
+
+  .text-quote {
+    border-left: 2px solid var(--gold-dim);
+    padding: 6px 12px;
+    margin: 8px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--cream);
+    line-height: 1.6;
+  }
 
   /* AI ESSAY */
   .essay-select {
@@ -735,7 +837,7 @@
   <div class="eyebrow">Spring 2026 · Midterm Exam</div>
   <h1>Indo-Tibetan <em>Buddhism</em></h1>
   <div class="subtitle">Study Guide · 30 Key Terms · 8 Discussion Topics · Exam Prep</div>
-  <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-faint);letter-spacing:0.1em;margin-top:0.75rem;">by Darran Shivdat &mdash; <em style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:0.05em;">"because i could not get myself to study"</em></div>
+  <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-faint);letter-spacing:0.1em;margin-top:0.75rem;">by Darran Shivdat &mdash; <em style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:0.05em;">"because i can not get myself to study"</em></div>
   <div class="format-pills">
     <span class="pill">10 Key Term Definitions</span>
     <span class="pill">3 of 5 Short Answers</span>
@@ -934,12 +1036,104 @@ const essayQs = [
 ];
 
 const texts = [
-  {title:"Life of the Buddha",author:"Ashvaghosha",translator:"Patrick Olivelle",notes:"The classical Sanskrit biography of Siddhartha Gautama. Source for the Four Sights, renunciation, and awakening narrative."},
-  {title:"Therigatha: Poems of the First Buddhist Women",author:"Early Buddhist women",translator:"Charles Hallisey",notes:"Pali poems by the first generation of enlightened nuns (theri). Key for women and enlightenment, renunciation, and arhat ideal."},
-  {title:"A Guide to the Bodhisattva's Way of Life",author:"Shantideva",translator:"Stephen Batchelor",notes:"Classic Mahayana text on cultivating bodhicitta and the six perfections. Central to the bodhisattva path and shunyata."},
-  {title:"The Holy Teachings of Vimalakirti",author:"Unknown (Mahayana sutra)",translator:"Robert Thurman",notes:"Sanskrit Mahayana sutra featuring the layman Vimalakirti. Key for upaya, shunyata, and the goddess episode on gender and enlightenment."},
-  {title:"The Spirit of Tibetan Buddhism",author:"Various",translator:"Sam Van Schaik (selections)",notes:"Covers the history of Buddhism's transmission to Tibet, imperial patronage, and the integration of the three traditions."},
-  {title:"The Hundred Thousand Songs of Milarepa",author:"Milarepa",translator:"Christopher Stagg",notes:"Songs of Tibet's beloved yogi. Illustrates Vajrayana practice, guru devotion, renunciation, and the integration of all three Buddhist traditions."},
+  {
+    title: "Life of the Buddha",
+    author: "Ashvaghosha",
+    translator: "Patrick Olivelle",
+    tradition: "Theravada",
+    period: "1st–2nd century CE",
+    location: "Ayodhya, India",
+    format: "Kavya — Sanskrit narrative poetry (stanzas)",
+    tags: ["Theravada", "Biography", "Sanskrit", "Kavya"],
+    context: "A literary biography of Siddhartha Gautama written in elegant Sanskrit verse. It begins with his descent from Tushita heaven, miraculous birth from Queen Maya's side, the prophecy of greatness, and follows his path through renunciation, six years of austerities, defeat of Mara, full enlightenment under the Bodhi tree, and his first teaching (turning the Wheel of Dharma). The text comes from the early Theravada tradition and serves as the foundational narrative for all subsequent Buddhist schools.",
+    terms: ["Buddha — the central subject; his entire life arc", "Queen Maya — his mother; her dream of a white elephant announces his birth", "Shakyamuni — 'sage of the Shakya clan,' another name for the historical Buddha", "Four Sights — elderly person, sick person, corpse, ascetic; prompt his renunciation", "Mara — the embodiment of temptation who tries to prevent awakening", "Dharma — the teachings he turns into motion after enlightenment", "Four Noble Truths — the substance of his first teaching", "Nirvana — the cessation he achieves; Parinirvana at death", "Samsara / Karma / Duhkha — the condition he escapes and teaches others to escape", "Sangha — the community that forms as he gathers followers"],
+    thesis: "This is not an argumentative text — it is a literary biography. Its purpose is to narrate the life of the historical Buddha as the origin and model for the entire tradition. The text establishes the paradigm of renunciation, awakening, and teaching that every subsequent Buddhist school responds to.",
+    synthesis: "This text is the foundation on which all other course texts rest. Without it, there is no Buddha to found the Sangha, no Dharma to transmit, no path to follow. It establishes the arhat ideal (personal liberation) that the Mahayana later expands into the bodhisattva ideal. It also presents renunciation as the necessary precondition for awakening — a theme that runs through every other text in the course. Notably absent: non-duality, emptiness (shunyata), tantric practice — these are what later traditions add.",
+    quotes: [],
+  },
+  {
+    title: "Therigatha: Poems of the First Buddhist Women",
+    author: "Early Buddhist women (theri)",
+    translator: "Charles Hallisey",
+    tradition: "Theravada",
+    period: "Compiled 500–300 BCE (oral), written down later",
+    location: "India; Pali canon",
+    format: "Anthology of poems (gatha) attributed to female disciples of the Buddha",
+    tags: ["Theravada", "Pali", "Poetry", "Women", "Arhat"],
+    context: "The Therigatha is part of the earliest stratum of Buddhist literature, written in Pali, and is considered the first anthology of literature by women in world history. The poems are attributed to the first generation of enlightened nuns (theri = senior female disciple; gatha = poem/song). They document women from diverse social backgrounds — queens, prostitutes, bereaved mothers — who renounced household life and achieved full awakening as arhats. Mahapajapati Gotami, the Buddha's stepmother, is a central figure who persuaded the Buddha to allow women into the ordained Sangha.",
+    terms: ["Theri — respectful title for a senior, enlightened female disciple", "Gatha — poem or 'song of experience'", "Arhat — full enlightenment; women in these poems achieve it completely", "Renunciation — the central act; women leave marriages, children, household roles", "Anatman — no-self; demonstrated through detachment from worldly identity", "Four Noble Truths — women are shown at different stages of engaging with duhkha and its cessation", "Three Jewels — Buddha, Dharma, Sangha; the community women join", "Sangha — specifically the nuns' order (bhikkhuni sangha) that Mahapajapati founds"],
+    thesis: "Women are equally capable of achieving full enlightenment as men. The text argues this not through doctrine but through example — poem after poem shows women achieving arhat status. It also challenges the idea that the monastic path requires abandoning femininity or social identity; what must be abandoned is attachment itself.",
+    synthesis: "Unlike the Life of the Buddha, which centers a single male figure, the Therigatha decentralizes the path and shows it as accessible to anyone regardless of gender or social background. It is the only text in the course that foregrounds the female experience of renunciation. While it comes from Theravada (where bodhisattva refers only to the Buddha's past lives), the message extends toward Mahayana values: the poems as a collection function almost like upaya — teaching devices that help future practitioners see what liberation looks like from the inside. The central tension the text opens — can women achieve enlightenment? — runs through the rest of the course.",
+    quotes: [],
+  },
+  {
+    title: "A Guide to the Bodhisattva's Way of Life",
+    author: "Shantideva",
+    translator: "Stephen Batchelor",
+    tradition: "Mahayana",
+    period: "8th century CE",
+    location: "Nalanda, India",
+    format: "Philosophical verse treatise (ten chapters)",
+    tags: ["Mahayana", "Sanskrit", "Ethics", "Bodhisattva", "Shunyata"],
+    context: "Written by the monk-scholar Shantideva at Nalanda, one of the great Buddhist universities of India, this is the definitive Mahayana manual for cultivating bodhicitta and practicing the six perfections. It transitions the focus of Buddhism from individual liberation (the arhat ideal of Theravada) to universal liberation (the bodhisattva ideal of Mahayana). It is both a philosophical treatise on emptiness (shunyata) and a practical guide to ethical cultivation — especially patience as the antidote to anger.",
+    terms: ["Bodhisattva — anyone on the Mahayana path who vows to remain in samsara for all beings (expanded from just the Buddha's past lives)", "Bodhicitta — the awakening mind; the intention to achieve buddhahood for others; both the foundation and goal of the path", "Six Perfections — giving, morality, patience, vigor, meditation, wisdom; the structured practice of the bodhisattva", "Shunyata — emptiness; all phenomena lack inherent existence; central to Chapter 9", "Anatman — no-self; the philosophical basis for dissolving ego-clinging and opening to others", "Upaya — skillful means; the bodhisattva's ability to meet beings where they are", "Mantra — used in concentration and merit-making practices", "Karma — actions and their effects; the basis for the ethical teachings"],
+    thesis: "The cultivation of bodhicitta — the awakening mind oriented toward all beings — is the foundation and heart of Mahayana practice. The text argues that patience (the antidote to anger) and wisdom (insight into emptiness) are the two most critical perfections. Enlightenment is not an individual achievement but a collective project: harming others is harming oneself; benefiting others is benefiting oneself.",
+    synthesis: "This text is the Mahayana answer to the Life of the Buddha. Where that text shows one person's path to liberation, Shantideva shows how anyone can walk a path oriented toward liberating everyone. It expands the meaning of key terms: bodhisattva now means any Mahayana practitioner, not just the historical Buddha's past lives. It also deepens shunyata from a philosophical concept into an ethical practice — realizing no-self is what makes genuine compassion possible. The contrast with the arhat ideal is essential: the arhat achieves personal nirvana; the bodhisattva stays in samsara by choice.",
+    quotes: [],
+  },
+  {
+    title: "The Holy Teachings of Vimalakirti",
+    author: "Unknown (Mahayana sutra)",
+    translator: "Robert Thurman",
+    tradition: "Mahayana",
+    period: "1st–2nd century CE (India); widely transmitted across Asia",
+    location: "India; Sanskrit original",
+    format: "Narrative sutra — philosophical dialogue embedded in a story",
+    tags: ["Mahayana", "Sanskrit", "Non-duality", "Upaya", "Shunyata"],
+    context: "A Mahayana sutra centering on Vimalakirti, an enlightened layman in the city of Vaishali, who falls ill. The Buddha's disciples and bodhisattvas refuse to visit him because he has previously embarrassed them in philosophical debate. Eventually Manjushri (the bodhisattva of wisdom) visits, and the sutra unfolds as a series of dazzling philosophical exchanges. The text is famous for Vimalakirti's 'thunderous silence' as the highest teaching on non-duality, and for a scene in which a goddess transforms Shariputra (the bumbling monk) into a woman, demolishing assumptions about gender and enlightenment.",
+    terms: ["Non-duality — the central theme; apparent opposites (self/other, samsara/nirvana, male/female, true/false) arise in relation to each other and cannot be separated", "Shunyata — emptiness; 'The Dharma is ultimately without formulation and without verbalization'", "Upaya — skillful means; Vimalakirti's illness, his silence, and his debates are all teaching devices", "Bodhisattva — anyone on the path; Vimalakirti proves enlightenment is not confined to monks", "Samsara — 'reality is flawed, which means it has the capacity for enlightenment' — samsara is a Buddhafield", "Nirvana — beyond concepts and words; defined through negation", "Shariputra — the mouthpiece for misunderstanding; the butt of the joke", "Anatman — no-self underpins the goddess scene: 'In all things, there is neither male nor female'"],
+    thesis: "All phenomena arise in relation to each other — nothing has fixed, independent existence. This non-dual insight is demonstrated not just argued: Vimalakirti's silence is the answer; the goddess's transformation of Shariputra is the teaching. The monastic path is not the only valid path; lay practice can reach full enlightenment. Enlightenment is for every being in every realm.",
+    synthesis: "This text does what no other text in the course does: it performs its philosophical claims rather than just stating them. The silence, the illness, the gender transformation — all are upaya. It radicalizes the Mahayana by showing that even the most prestigious monks (Shariputra) can be wrong, and that a layman and a goddess can outteach them. It is essential for understanding the tension around women and enlightenment: the goddess's argument — 'in all things, there is neither male nor female' — is a direct application of anatman and shunyata to the question of gender. It also deepens samsara by recasting it as a Buddhafield: the imperfect world is not just the problem, it is the site of liberation.",
+    quotes: [
+      "\"The Dharma is ultimately without formulation and without verbalization.\"",
+      "\"In all things, there is neither male nor female.\"",
+      "\"Sin is just the same as the mind, and all things are just the same as sin.\"",
+    ],
+  },
+  {
+    title: "The Spirit of Tibetan Buddhism",
+    author: "Various historical sources",
+    translator: "Sam Van Schaik (selections: ch. 2, 5, 8, 11, 14)",
+    tradition: "Vajrayana / Tibetan Buddhism",
+    period: "8th–9th century CE (historical events); modern scholarly synthesis",
+    location: "Tibet",
+    format: "Modern scholarly overview drawing on historical Tibetan texts and sources",
+    tags: ["Vajrayana", "Tibetan", "History", "Politics", "Ethics"],
+    context: "This text is a modern scholarly synthesis explaining how Buddhism developed in Tibet. It covers the imperial patronage of Buddhism under kings Songtsen Gampo (7th c.) and Trisong Detsen (8th c.), who invited Indian masters and translators, commissioned Tibetan translations of Sanskrit texts, and institutionalized Buddhism as a state religion. It shows how Tibetan Buddhism is not a simple copy of Indian Buddhism but a creative synthesis shaped by ritual innovation, political power, and cultural adaptation. Chapter 2 introduces the Ten Virtues as the ethical foundation; later chapters address the lama-disciple relationship, Vajrayana practice, and the integration of all three traditions.",
+    terms: ["Vajrayana — accelerated path to enlightenment through ritual, mantra, and deity yoga", "Karma — 'no more than actions and their effects'; happiness and suffering depend on how we choose to act", "Three Jewels — taking refuge in Buddha, Dharma, Sangha is the minimal requirement of being Buddhist", "Vinaya — the monastic code transmitted from the Mulasarvastivada (Theravada) lineage to Tibet", "Dharma — the teachings; also functions as a political legitimating force", "Samsara — 'life is an endless cycle of birth and death'; the three lower realms result from anger, greed, stupidity", "Mahayana — bodhisattva path integrated alongside Theravada vinaya", "Mantra — central to Vajrayana ritual practice", "Lama/Guru — authority shifts from the historical Buddha to the teacher-disciple relationship"],
+    thesis: "Tibetan Buddhism is not a pure continuation of Indian Buddhism but a creative synthesis shaped by ritual innovation, political power, and cultural adaptation. The integration of ethics (Ten Virtues), Mahayana philosophy, and Vajrayana ritual into a coherent system was made possible by imperial patronage. Authority in this tradition moves from the historical Buddha toward the living guru.",
+    synthesis: "This text is unique in the course because it shows Buddhism functioning as a historical, political, and institutional system — not just a philosophy or a practice. Where earlier texts debate what enlightenment is, this text shows how Buddhism actually operates in the world. It explains why Tibetan Buddhism looks so different from Theravada: it integrates all three traditions (Theravada vinaya, Mahayana bodhisattva path, Vajrayana ritual) and embeds them in a political and cultural context. Essential for the essay question on the integration of traditions into Tibetan Buddhism.",
+    quotes: [
+      "\"Happiness and suffering are both within our reach, and whether we experience one or the other is entirely dependent on how we choose to act.\"",
+    ],
+  },
+  {
+    title: "The Hundred Thousand Songs of Milarepa",
+    author: "Milarepa",
+    translator: "Christopher Stagg",
+    tradition: "Vajrayana — Kagyu (Oral Transmission) School",
+    period: "11th–12th century CE",
+    location: "Tibet",
+    format: "Hagiography and collected songs (doha) — narrative prose interwoven with verse",
+    tags: ["Vajrayana", "Kagyu", "Songs", "Renunciation", "Guru"],
+    context: "Milarepa is Tibet's most beloved yogi. His story begins with family tragedy: his father dies and his aunt and uncle steal the family wealth. His bitter mother pushes him toward black magic, which he uses to kill relatives — filling him with remorse. He seeks out Marpa, a great Buddhist teacher, who puts him through years of harsh trials to purify his karma. After transmission of the complete Vajrayana teachings, Milarepa meditates in caves, achieves full realization, and transmits his wisdom through spontaneous songs to disciples, hunters, demons, and gods. The text is associated with the Kagyu School, which emphasizes direct oral transmission from teacher to student.",
+    terms: ["Vajrayana — the entire text is saturated with tantric practice: guru devotion, mantra, yogic heat (tummo), deity language", "Renunciation — one of the biggest themes; Milarepa treats it as essential and models it completely", "Dharma — presented as lived practice, not only doctrine", "Bodhicitta — compassion and concern for all beings; Milarepa does not seek escape only for himself", "Samsara — worldly life, family attachment, wealth, comfort, reputation shown as unstable and bound in suffering", "Karma — explains his early suffering and why harmful actions produce further bondage", "Shunyata — emptiness appears through teachings on the mind's nature and the non-solid character of appearances", "Anatman — constantly undermines clinging to ego, pride, and fixed identity", "Guru/Lama — Marpa's role is central; transmission is personal and demanding", "Sangha — appears through guru-disciple lineage rather than large monasteries", "Women — several chapters show women as serious disciples; connects to course theme of women and enlightenment"],
+    thesis: "Anyone can achieve liberation no matter how far they have strayed. Liberation does not come from controlling the outer world first — it comes from disciplining and transforming the mind through devotion, renunciation, and meditation. What looks external (beauty, fame, hardship) is always turned back into an inner question: 'At all times and in every way / Tame the evil demons within your mind-stream.'",
+    synthesis: "Milarepa is the living synthesis of all three Buddhist traditions: Theravada ethics and vinaya as the foundation, Mahayana bodhicitta and compassion as the orientation, Vajrayana tantra as the accelerated method. No other text in the course shows this integration so concretely in a single practitioner's life. It also answers the most practical version of the course's central question: how does one actually practice? Not through doctrine but through songs, stories, and direct transmission. His story of wrongdoing and redemption also speaks powerfully to the meaning of karma and the possibility of transformation.",
+    quotes: [
+      "\"At all times and in every way / Tame the evil demons within your mind-stream.\"",
+    ],
+  },
 ];
 
 // ── RENDER ──
@@ -1059,13 +1253,45 @@ function toggleHint(btn){
 
 // ── TEXTS ──
 function renderTexts(){
-  document.getElementById('textsList').innerHTML=texts.map(t=>
-    `<div class="text-card">
-      <div class="text-title">${t.title}</div>
-      <div class="text-meta">by ${t.author} · trans. ${t.translator}</div>
-      <div class="term-def" style="display:block;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">${t.notes}</div>
+  document.getElementById('textsList').innerHTML = texts.map((t,i) => `
+    <div class="text-card" id="txc${i}" onclick="toggleText(${i})">
+      <div class="text-card-header">
+        <div class="text-card-left">
+          <div class="text-title">${t.title}</div>
+          <div class="text-meta">by ${t.author} · trans. ${t.translator} · ${t.period}</div>
+          <div class="text-tags">${t.tags.map(tag=>`<span class="text-tag">${tag}</span>`).join('')}</div>
+        </div>
+        <div class="text-chevron">▼</div>
+      </div>
+      <div class="text-card-body">
+        <div class="text-section">
+          <div class="text-section-label">Format &amp; context</div>
+          <div class="text-section-body"><strong style="color:var(--gold);font-weight:500;">Format:</strong> ${t.format}<br><br>${t.context}</div>
+        </div>
+        <div class="text-section">
+          <div class="text-section-label">Central terms &amp; concepts</div>
+          <div class="text-section-body"><ul>${t.terms.map(term=>`<li>${term}</li>`).join('')}</ul></div>
+        </div>
+        <div class="text-section">
+          <div class="text-section-label">Main argument</div>
+          <div class="text-section-body">${t.thesis}</div>
+        </div>
+        ${t.quotes.length ? `<div class="text-section">
+          <div class="text-section-label">Key quotes</div>
+          <div class="text-section-body">${t.quotes.map(q=>`<div class="text-quote">${q}</div>`).join('')}</div>
+        </div>` : ''}
+        <div class="text-section">
+          <div class="text-section-label">Synthesis — relevance to course</div>
+          <div class="text-section-body">${t.synthesis}</div>
+        </div>
+      </div>
     </div>`
   ).join('');
+}
+
+function toggleText(i) {
+  const card = document.getElementById('txc'+i);
+  card.classList.toggle('open');
 }
 
 // ── AI ESSAY ──

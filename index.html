@@ -838,7 +838,7 @@
   <div class="eyebrow">Spring 2026 · Midterm Exam</div>
   <h1>Indo-Tibetan <em>Buddhism</em></h1>
   <div class="subtitle">Study Guide · 30 Key Terms · 8 Discussion Topics · Exam Prep</div>
-  <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-faint);letter-spacing:0.1em;margin-top:0.75rem;">by Darran Shivdat &mdash; <em style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:0.05em;">"because i can not get myself to study"</em></div>
+  <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text-faint);letter-spacing:0.1em;margin-top:0.75rem;">by Darran Shivdat &mdash; <em style="font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:0.05em;">"because i cant get myself to study"</em></div>
   <div class="format-pills">
     <span class="pill">10 Key Term Definitions</span>
     <span class="pill">3 of 5 Short Answers</span>
@@ -1382,6 +1382,15 @@ function copyOutput() {
 
 // ── NAV ──
 function showTab(id, btn) {
+  // Close all term cards
+  document.querySelectorAll('.term-card.open').forEach(c => {
+    c.classList.remove('open');
+    const ind = c.querySelector('.term-indicator');
+    if (ind) ind.textContent = 'tap to reveal';
+  });
+  // Close all text cards
+  document.querySelectorAll('.text-card.open').forEach(c => c.classList.remove('open'));
+
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById(id).classList.add('active');

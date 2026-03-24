@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indo-Tibetan Buddhism — Midterm Study Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0c0a;
+    --bg2: #161310;
+    --bg3: #1e1a16;
+    --bg4: #26211b;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --gold-dim: #7a6330;
+    --cream: #f0e8d8;
+    --cream-dim: #a89880;
+    --text: #e8dece;
+    --text-muted: #8a7d6e;
+    --text-faint: #4a4035;
+    --red: #c45c3a;
+    --red-bg: #1e1008;
+    --teal: #5a9e8a;
+    --teal-bg: #0a1a16;
+    --border: rgba(201,168,76,0.15);
+    --border-strong: rgba(201,168,76,0.35);
+    --radius: 6px;
+    --radius-lg: 10px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* Header */
+  header {
+    position: relative;
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '☸';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 420px;
+    color: rgba(201,168,76,0.03);
+    line-height: 1;
+    pointer-events: none;
+    animation: slowspin 120s linear infinite;
+  }
+
+  @keyframes slowspin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 300;
+    color: var(--cream);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+    margin-bottom: 0.5rem;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .subtitle {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.12em;
+    margin-top: 1rem;
+  }
+
+  .format-pills {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--border-strong);
+    color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+
+  /* Nav */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(14,12,10,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  nav::-webkit-scrollbar { display: none; }
+
+  .nav-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 14px 18px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .nav-btn:hover { color: var(--cream); }
+  .nav-btn.active { color: var(--gold-light); border-bottom-color: var(--gold); }
+
+  /* Main layout */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.3rem;
+  }
+
+  .section-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+
+  /* ── TERMS ── */
+  .terms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+
+  .term-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .term-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: var(--gold);
+    transform: scaleY(0);
+    transition: transform 0.2s;
+    transform-origin: bottom;
+  }
+
+  .term-card:hover { border-color: var(--border-strong); background: var(--bg3); }
+  .term-card.open { border-color: rgba(201,168,76,0.4); background: var(--bg3); }
+  .term-card.open::before { transform: scaleY(1); }
+
+  .term-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--gold-light);
+    margin-bottom: 2px;
+  }
+
+  .term-indicator {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    transition: color 0.2s;
+  }
+
+  .term-card.open .term-indicator { color: var(--gold-dim); }
+
+  .term-def {
+    display: none;
+    font-size: 12.5px;
+    color: var(--cream-dim);
+    line-height: 1.6;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+  }
+
+  .term-card.open .term-def { display: block; }
+
+  /* ── QUIZ ── */
+  .quiz-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .score-display {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    color: var(--cream);
+  }
+
+  .score-display span { color: var(--gold-light); }
+
+  .restart-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-strong);
+    background: none;
+    color: var(--gold-dim);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .restart-btn:hover { background: rgba(201,168,76,0.08); color: var(--gold); }
+
+  .q-prompt {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 1rem;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .q-prompt::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 10px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+  }
+
+  .q-prompt p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: var(--cream);
+    text-align: center;
+    line-height: 1.4;
+    position: relative;
+    z-index: 1;
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 1rem;
+  }
+
+  @media (max-width: 560px) {
+    .options-grid { grid-template-columns: 1fr; }
+  }
+
+  .opt {
+    padding: 12px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    color: var(--cream-dim);
+    font-size: 12.5px;
+    line-height: 1.5;
+    font-family: 'Instrument Sans', sans-serif;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.15s;
+  }
+
+  .opt:hover:not(:disabled) { border-color: var(--border-strong); background: var(--bg3); color: var(--cream); }
+  .opt:disabled { cursor: default; }
+
+  .opt.correct {
+    border-color: rgba(90,158,138,0.6);
+    background: var(--teal-bg);
+    color: var(--teal);
+  }
+
+  .opt.wrong {
+    border-color: rgba(196,92,58,0.5);
+    background: var(--red-bg);
+    color: var(--red);
+  }
+
+  #feedback {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    min-height: 18px;
+    margin-bottom: 10px;
+  }
+
+  .next-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    padding: 9px 20px;
+    border-radius: var(--radius);
+    border: 1px solid var(--gold-dim);
+    background: rgba(201,168,76,0.08);
+    color: var(--gold-light);
+    cursor: pointer;
+    display: none;
+    transition: all 0.2s;
+  }
+
+  .next-btn:hover { background: rgba(201,168,76,0.15); }
+
+  .progress-bar {
+    height: 2px;
+    background: var(--bg4);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold-dim), var(--gold-light));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── TOPICS ── */
+  .topic-item {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .topic-item::before {
+    content: '—';
+    position: absolute;
+    left: 0.75rem;
+    top: 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--gold-dim);
+  }
+
+  .topic-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+
+  .topic-body {
+    font-size: 13px;
+    color: var(--cream-dim);
+    line-height: 1.7;
+  }
+
+  /* ── EXAM ── */
+  .exam-block {
+    margin-bottom: 2rem;
+  }
+
+  .block-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .block-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .essay-card {
+    background: var(--bg2);
+    border: 1px solid rgba(90,158,138,0.3);
+    border-left: 3px solid var(--teal);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+  }
+
+  .essay-card p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .essay-tips {
+    list-style: none;
+    padding: 0;
+  }
+
+  .essay-tips li {
+    font-size: 12px;
+    color: var(--cream-dim);
+    padding: 4px 0;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .essay-tips li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .short-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 8px;
+  }
+
+  .short-q {
+    font-size: 13px;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+
+  .hint-toggle {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-dim);
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 4px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .hint-toggle:hover { border-color: var(--border-strong); color: var(--gold); }
+
+  .hint-text {
+    display: none;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
+    line-height: 1.6;
+  }
+
+  .term-tip-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.1rem 1.25rem;
+    font-size: 13px;
+    color: var(--cream-dim);
+    line-height: 1.75;
+  }
+
+  .term-tip-card strong {
+    color: var(--gold-light);
+    font-weight: 500;
+  }
+
+  /* ── TEXTS ── */
+  .texts-grid {
+    display: grid;
+    gap: 8px;
+  }
+
+  .text-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .text-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--cream);
+    font-style: italic;
+  }
+
+  .text-meta {
+    font-size: 11.5px;
+    color: var(--text-muted);
+  }
+
+  /* Animations */
+  .section.active .term-card,
+  .section.active .topic-item,
+  .section.active .short-card,
+  .section.active .text-card {
+    animation: fadeup 0.3s ease both;
+  }
+
+  .section.active .term-card:nth-child(1) { animation-delay: 0.02s; }
+  .section.active .term-card:nth-child(2) { animation-delay: 0.04s; }
+  .section.active .term-card:nth-child(3) { animation-delay: 0.06s; }
+  .section.active .term-card:nth-child(4) { animation-delay: 0.08s; }
+  .section.active .term-card:nth-child(5) { animation-delay: 0.1s; }
+
+  @keyframes fadeup {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-faint);
+    position: relative;
+    z-index: 1;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 2.5rem 1.25rem 2rem; }
+    main { padding: 2rem 1.25rem 3rem; }
+    .terms-grid { grid-template-columns: 1fr 1fr; }
+    nav { padding: 0 0.5rem; }
+    .nav-btn { padding: 14px 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Spring 2026 · Midterm Exam</div>
+  <h1>Indo-Tibetan <em>Buddhism</em></h1>
+  <div class="subtitle">Study Guide · 30 Key Terms · 8 Discussion Topics · Exam Prep</div>
+  <div class="format-pills">
+    <span class="pill">10 Key Term Definitions</span>
+    <span class="pill">3 of 5 Short Answers</span>
+    <span class="pill">1 Required Essay</span>
+  </div>
+</header>
+
+<nav>
+  <button class="nav-btn active" onclick="showTab('terms', this)">Key Terms</button>
+  <button class="nav-btn" onclick="showTab('quiz', this)">Flashcard Quiz</button>
+  <button class="nav-btn" onclick="showTab('topics', this)">Discussion Topics</button>
+  <button class="nav-btn" onclick="showTab('exam', this)">Exam Prep</button>
+  <button class="nav-btn" onclick="showTab('texts', this)">Key Texts</button>
+</nav>
+
+<main>
+
+  <!-- TERMS -->
+  <div id="terms" class="section active">
+    <h2 class="section-title">Key Terms</h2>
+    <p class="section-desc">Click any term to reveal its definition. 30 terms total.</p>
+    <div class="terms-grid" id="termGrid"></div>
+  </div>
+
+  <!-- QUIZ -->
+  <div id="quiz" class="section">
+    <h2 class="section-title">Flashcard Quiz</h2>
+    <p class="section-desc">Identify the correct definition for each term. Multiple choice.</p>
+    <div class="quiz-header">
+      <div class="score-display">Score: <span id="scoreDisplay">0 / 0</span></div>
+      <button class="restart-btn" onclick="restartQuiz()">↺ Restart</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="q-prompt"><p id="qText">Loading question…</p></div>
+    <div class="options-grid" id="optionBtns"></div>
+    <div id="feedback"></div>
+    <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next question →</button>
+  </div>
+
+  <!-- TOPICS -->
+  <div id="topics" class="section">
+    <h2 class="section-title">Discussion Topics</h2>
+    <p class="section-desc">All 8 topics from the study guide. Know these well — they anchor both short answers and the essay.</p>
+    <div id="topicList"></div>
+  </div>
+
+  <!-- EXAM -->
+  <div id="exam" class="section">
+    <h2 class="section-title">Exam Prep</h2>
+    <p class="section-desc">Format: 10 key term definitions + 3 of 5 short answers + 1 required essay. Practice with the prompts below — click any to reveal an outline or hint.</p>
+
+    <div class="exam-block">
+      <div class="block-label">Essay prompts — one required</div>
+      <div id="essayList"></div>
+    </div>
+
+    <div class="exam-block">
+      <div class="block-label">Potential short answer questions (12)</div>
+      <div id="shortAnswerList"></div>
+    </div>
+
+    <div class="exam-block">
+      <div class="block-label">Key term strategy</div>
+      <div class="term-tip-card">
+        For each of the 10 key term definitions, aim for 2–3 sentences structured as:
+        <br><br>
+        <strong>(1) Literal meaning</strong> — etymology or translation (e.g., "Anatman means 'no-self'…").
+        <br>
+        <strong>(2) Doctrinal role</strong> — what function does it play in Buddhist thought or practice?
+        <br>
+        <strong>(3) Textual/traditional anchor</strong> — connect it to a specific text, tradition, or figure from the course.
+        <br><br>
+        Terms most likely to appear: Anatman, Bodhisattva, Bodhicitta, Shunyata, Karma, Four Noble Truths, Upaya, Vajrayana, Vinaya, Arhat.
+      </div>
+    </div>
+  </div>
+
+  <!-- TEXTS -->
+  <div id="texts" class="section">
+    <h2 class="section-title">Key Texts</h2>
+    <p class="section-desc">Review materials from the course. Know the author/translator and central themes of each.</p>
+    <div class="texts-grid" id="textsList"></div>
+  </div>
+
+</main>
+
+<footer>Indo-Tibetan Buddhism · Spring 2026 · Study Guide</footer>
+
+<script>
+const terms = [
+  {t:"Buddha",d:"Awakened one; the historical figure (Shakyamuni) who founded Buddhism after achieving enlightenment under the Bodhi tree."},
+  {t:"Sangha",d:"The community of Buddhists. The fourfold Sangha includes monks, nuns, laymen, and laywomen. One of the Three Jewels."},
+  {t:"Theravada",d:"Earliest tradition of Buddhism associated with the Pali canon; widely practiced in Southeast Asia. The Tibetan vinaya lineage derives from this tradition."},
+  {t:"Tripitaka",d:"The 'three baskets' of the Pali canon: sutra (discourses), vinaya (monastic code), and abhidharma (metaphysics)."},
+  {t:"Sutra",d:"Buddhist scripture; texts documenting discourses of the Buddha. Mahayana sutras are written in Sanskrit."},
+  {t:"Vinaya",d:"Texts conveying the monastic code of vows, stories, and explanations for monastic rules. One of the three baskets of the canon."},
+  {t:"Abhidharma",d:"Texts on Buddhist metaphysics; the third basket of the Pali canon. Provides systematic analysis of mind and phenomena."},
+  {t:"Shakyamuni",d:"'Sage of the Sakya clan' — one of several names for the historical Buddha, whose family was the Sakya clan."},
+  {t:"Arhat",d:"Someone who has completely overcome disturbing emotions and achieved nirvana; often associated with the early students of the historical Buddha."},
+  {t:"Anatman",d:"No-self; the Buddha's central philosophical insight that the self is not permanent and has no fixed, independent essence."},
+  {t:"Theri",d:"A respectful term for a female elder nun; source of the Therigatha ('poems of the elder nuns')."},
+  {t:"Gatha",d:"A song or poem; as in the Therigatha — poems composed by the first generation of enlightened Buddhist women."},
+  {t:"Mahayana",d:"The 'great vehicle'; associated with the bodhisattva path, emptiness philosophy, and Sanskrit sutras — the second major tradition to develop in India."},
+  {t:"Vajrayana",d:"The third major tradition; also known as esoteric or tantric Buddhism. Sometimes considered a development within Mahayana. Central to Tibetan Buddhism."},
+  {t:"Queen Maya",d:"The historical Buddha's mother, who died shortly after giving birth to him. Her dream of a white elephant announced the birth."},
+  {t:"Six Perfections",d:"Paramita: giving, morality, patience, vigor, meditation, and wisdom — the core practices of the Mahayana bodhisattva path."},
+  {t:"Dharma",d:"The teachings of the Buddha; another name for Buddhism itself. One of the Three Jewels (Buddha, Dharma, Sangha)."},
+  {t:"Samsara",d:"The cycle of rebirth fueled by karma; characterized by duhkha (suffering/dissatisfaction). The realm from which liberation is sought."},
+  {t:"Six realms",d:"The spheres of rebirth: god, demi-god, human, animal, hungry ghost, and hell realms — depicted in the Wheel of Existence."},
+  {t:"Karma",d:"The law of causes, effects, and conditions; intentional actions create karmic imprints that fuel rebirth in samsara."},
+  {t:"Duhkha",d:"Dissatisfaction or 'suffering' that characterizes existence in samsara; the first of the Four Noble Truths."},
+  {t:"Nirvana",d:"The cessation of samsara; freedom from rebirth in the six realms. Another word for enlightenment or full awakening."},
+  {t:"Four Noble Truths",d:"(1) Dissatisfaction exists, (2) it has root causes (craving/ignorance), (3) it can cease, (4) the eightfold path leads to its cessation."},
+  {t:"Four Sights",d:"An elderly person, a sick person, a corpse, and a wandering ascetic — the four sights that prompted Prince Siddhartha to renounce worldly life."},
+  {t:"Mara",d:"The embodiment of evil and temptation who tried to prevent the Buddha from achieving awakening beneath the Bodhi tree."},
+  {t:"Bodhisattva",d:"One dedicated to the Mahayana path who vows to remain engaged in samsara until all beings are liberated. Also a term for the Buddha's previous incarnations."},
+  {t:"Bodhicitta",d:"The awakening mind; the compassionate intention to achieve buddhahood for the benefit of all beings. The foundation of Mahayana practice."},
+  {t:"Upaya",d:"Liberative technique or 'skillful means'; a bodhisattva's capacity to teach and help beings in whatever way is most effective for each individual."},
+  {t:"Shunyata",d:"Emptiness or voidness; the Mahayana teaching that all phenomena lack inherent, independent existence. Central to Shantideva and the Vimalakirti Sutra."},
+  {t:"Mandala",d:"A symbolic representation of the palatial home of a Buddha or bodhisattva; used as a ritual offering and meditative tool in Vajrayana practice."},
+];
+
+const topics = [
+  {h:"The Four Noble Truths",p:"The truth of dissatisfaction (duhkha), its root causes (karma and craving), the possibility of its cessation (nirvana), and the eightfold path as the way to reach that cessation. This is the Buddha's core diagnostic framework for human suffering and liberation."},
+  {h:"The Four Sights",p:"An elderly person, a sick person, a corpse, and a wandering ascetic — the four encounters that awakened Prince Siddhartha to the reality of impermanence and suffering, inspiring him to renounce his royal life and seek liberation."},
+  {h:"The Wheel of Existence",p:"Visual representation of samsara showing the six realms of rebirth, driven by the three poisons at the center: ignorance (pig), desire (rooster), and hatred (snake). Karma determines which realm beings are born into. Mara or Yama typically holds the wheel."},
+  {h:"Three Major Traditions in Tibetan Buddhism",p:"Theravada (vinaya ordination lineage), Mahayana (bodhisattva path, emptiness philosophy, Sanskrit sutras), and Vajrayana (tantric/esoteric practices, mantra, mandala) were all transmitted to Tibet and integrated into a single system. Milarepa exemplifies this full integration in one practitioner."},
+  {h:"The Importance of Renunciation",p:"Leaving household life is the model and foundation of Buddhist practice. The prince's renunciation of wealth and power is the paradigm. The Therigatha demonstrates women's renunciation as equally — and sometimes more dramatically — transformative."},
+  {h:"The Three Jewels",p:"Buddha (the teacher and exemplar), Dharma (the teachings and path), and Sangha (the community of practitioners) — the three objects of refuge fundamental to all Buddhist traditions. Taking refuge in the Three Jewels is the entry point into Buddhism."},
+  {h:"Imperial Rulers and Transmission to Tibet",p:"Tibetan imperial patronage — especially under Songtsen Gampo (7th c.) and Trisong Detsen (8th c.) — was decisive for Buddhism's transmission to Tibet. Kings invited translators and masters, commissioned translations, and supported monasteries. The Spirit of Tibetan Buddhism covers this history in detail."},
+  {h:"Women and Enlightenment",p:"The Therigatha documents women achieving full awakening as arhats, arguing implicitly for equal capacity. But institutional barriers to women's ordination (vinaya) created persistent tensions. The Vimalakirti Sutra addresses this through the goddess episode. The debate continues across traditions."},
+];
+
+const shortQs = [
+  {q:"Explain the relationship between karma, samsara, and the six realms. How do these three concepts function together as a system?",h:"Karma is the cause → samsara is the cycle → the six realms are the possible conditions of rebirth. Connect to the Wheel of Existence and the three poisons that drive it."},
+  {q:"What is the significance of the Four Sights in the life of the Buddha, and how do they connect to the Four Noble Truths?",h:"Each sight corresponds to a dimension of duhkha (aging, illness, death); the ascetic points toward the path. The Sights prompt renunciation; the Truths name what he discovered."},
+  {q:"How does the Mahayana tradition redefine the goal of Buddhist practice in contrast to the Theravada ideal?",h:"Arhat (personal nirvana, Theravada ideal) vs. Bodhisattva (remaining in samsara for all beings, Mahayana ideal). Introduce bodhicitta and the six perfections as the Mahayana alternative."},
+  {q:"Discuss the tension around women's capacity for enlightenment using at least one text from the course.",h:"Therigatha: women as fully realized arhats. Institutional barriers via vinaya rules on nuns' ordination. The goddess in Vimalakirti challenges assumptions about gender and enlightenment."},
+  {q:"What is bodhicitta, and why is it central to the Mahayana path? Use Shantideva's Guide to support your answer.",h:"Bodhicitta = awakening mind oriented toward all beings. Shantideva: cultivating it through the six perfections, especially patience and wisdom. It is both the foundation and the fruit of Mahayana practice."},
+  {q:"What is the role of the Three Jewels in Buddhist practice, and how does taking refuge in them function as an entry point into Buddhism?",h:"Buddha (teacher/exemplar), Dharma (teachings/path), Sangha (community). Refuge is the formal commitment that begins Buddhist practice across all three traditions. Consider how each jewel functions differently in Theravada vs. Mahayana contexts."},
+  {q:"How does the concept of upaya (skillful means) challenge a fixed or dogmatic understanding of Buddhist teaching? Illustrate with reference to the Vimalakirti Sutra.",h:"Upaya = meeting beings where they are. Vimalakirti's silence as the highest teaching; his illness as a teaching device. The bodhisattva adapts form to context. This destabilizes any single 'correct' formulation of Dharma."},
+  {q:"What does the Therigatha reveal about the experience of renunciation for early Buddhist women? How does their path compare to that of the prince who becomes the Buddha?",h:"The theri poems document leaving marriages, children, and household life — often more socially constrained than the prince's departure. Compare specific poems to the Life of the Buddha narrative. Both lead to arhat realization."},
+  {q:"Explain the concept of anatman. Why is 'no-self' considered the Buddha's central philosophical insight, and what are its practical implications for the path?",h:"Anatman refutes a permanent, fixed self. This dissolves the basis for craving and aversion (which depend on a self to protect/gratify). Practically: meditation on impermanence, the arhat's freedom from ego-clinging. Connect to duhkha and nirvana."},
+  {q:"How does Milarepa's life story illustrate the integration of all three major traditions of Buddhism? What does his path suggest about the relationship between renunciation, ethics, and tantric practice?",h:"Theravada: vinaya ethics as foundation. Mahayana: bodhicitta and devotion to the guru as bodhisattva. Vajrayana: tantric practice as the accelerated path. His early life of wrongdoing and later transformation also speaks to the power of renunciation and karma."},
+  {q:"What is shunyata, and how does it function in Mahayana Buddhist thought? How does the Vimalakirti Sutra use narrative and dialogue to point toward emptiness?",h:"Shunyata = all phenomena lack inherent, independent existence. In Vimalakirti: the layman's silence, the goddess's transformation, non-duality as the highest teaching. These are not just philosophical claims but performative demonstrations of emptiness."},
+  {q:"How does the vinaya function as the foundation of Buddhist institutional life? Why has the transmission and maintenance of the vinaya been significant in Tibetan Buddhism?",h:"Vinaya = monastic code that structures ordination, conduct, and community. Without valid vinaya transmission, no legitimate ordained Sangha. Tibetan Buddhism received its vinaya from the Mulasarvastivada tradition (Theravada lineage). Connect to the challenges of transmitting full nuns' ordination to Tibet."},
+];
+
+const essayQs = [
+  {
+    q:"How have the three major traditions of Buddhism — Theravada, Mahayana, and Vajrayana — been integrated into Tibetan Buddhism? Discuss the role of imperial patronage and the transmission of key texts and practices to Tibetan regions.",
+    tips:[
+      "Define all three traditions and their distinguishing features (Tripitaka/vinaya; bodhisattva/shunyata; tantra/mantra)",
+      "Explain the historical transmission through imperial patronage (Songtsen Gampo, Trisong Detsen)",
+      "Draw on The Spirit of Tibetan Buddhism and The Hundred Thousand Songs of Milarepa",
+      "Show how Milarepa synthesizes all three streams in a single practitioner",
+      "Conclude with a broader statement on what makes Tibetan Buddhism distinctive"
+    ]
+  },
+  {
+    q:"Buddhism has been described as a tradition that is fundamentally concerned with suffering and liberation. Drawing on at least three texts from the course, trace how duhkha, its causes, and the path to its cessation are understood across the Theravada, Mahayana, and Vajrayana traditions.",
+    tips:[
+      "Ground the essay in the Four Noble Truths as the shared framework",
+      "Theravada angle: arhat ideal, Pali canon, renunciation (Life of the Buddha, Therigatha)",
+      "Mahayana angle: bodhisattva extends liberation to all beings; shunyata reframes the problem (Shantideva, Vimalakirti)",
+      "Vajrayana angle: the path is accelerated through tantric means; suffering becomes the path (Milarepa)",
+      "Argue that each tradition deepens or reframes the original insight rather than abandoning it"
+    ]
+  },
+  {
+    q:"What does Buddhism across its three major traditions say about the status and spiritual capacity of women? Drawing on the Therigatha, the Vimalakirti Sutra, and at least one other course text, analyze both the liberatory possibilities and the institutional limitations women have faced.",
+    tips:[
+      "Open with the tension: women can achieve full awakening (Therigatha's arhats) yet face structural barriers (vinaya, ordination controversies)",
+      "Therigatha: specific poems showing women's renunciation and realization — compare their social sacrifices to the prince's",
+      "Vimalakirti: the goddess episode as a philosophical challenge to gendered assumptions about enlightenment",
+      "Consider Mahayana and Vajrayana developments: female bodhisattvas, female teachers in Tibetan tradition",
+      "Conclude: does Buddhism's philosophy of no-self (anatman) undercut gender distinctions, or do institutional structures reassert them?"
+    ]
+  },
+  {
+    q:"The bodhisattva ideal represents a radical transformation of what it means to practice Buddhism. Using Shantideva's Guide to the Bodhisattva's Way of Life and The Holy Teachings of Vimalakirti, analyze the bodhisattva path: what motivates it, what it demands, and how it differs from the arhat ideal of early Buddhism.",
+    tips:[
+      "Define bodhisattva and bodhicitta clearly; contrast with the arhat ideal (personal nirvana vs. universal liberation)",
+      "Shantideva: bodhicitta as the foundation; the six perfections as the practice; patience and wisdom as central",
+      "Vimalakirti: the layman as bodhisattva; upaya as the defining capacity; illness and silence as teachings",
+      "Discuss the spectrum of bodhisattva levels — from aspiration to near-buddhahood",
+      "What does the bodhisattva ideal suggest about the relationship between self and other, given anatman?"
+    ]
+  },
+  {
+    q:"Renunciation is sometimes called the foundation of the entire Buddhist path. Drawing on at least three texts from the course, analyze what renunciation means in practice, who undertakes it, and why it is considered spiritually essential.",
+    tips:[
+      "Define renunciation broadly: not just leaving home, but turning away from attachment to samsara",
+      "Life of the Buddha: the prince's departure as paradigm — Four Sights as its catalyst",
+      "Therigatha: women's renunciation — what they leave behind, how their poems express liberation",
+      "Milarepa: renunciation after a life of wrongdoing; the guru relationship as part of this turning",
+      "Is renunciation always monastic, or can it be practiced in the world? Use Vimalakirti as a counterpoint"
+    ]
+  },
+];
+
+const texts = [
+  {title:"Life of the Buddha",author:"Ashvaghosha",translator:"Patrick Olivelle",notes:"The classical Sanskrit biography of Siddhartha Gautama. Source for the Four Sights, renunciation, and awakening narrative."},
+  {title:"Therigatha: Poems of the First Buddhist Women",author:"Early Buddhist women",translator:"Charles Hallisey",notes:"Pali poems by the first generation of enlightened nuns (theri). Key for women and enlightenment, renunciation, and arhat ideal."},
+  {title:"A Guide to the Bodhisattva's Way of Life",author:"Shantideva",translator:"Stephen Batchelor",notes:"Classic Mahayana text on cultivating bodhicitta and the six perfections. Central to the bodhisattva path and shunyata."},
+  {title:"The Holy Teachings of Vimalakirti",author:"Unknown (Mahayana sutra)",translator:"Robert Thurman",notes:"Sanskrit Mahayana sutra featuring the layman Vimalakirti. Key for upaya, shunyata, and the goddess episode on gender and enlightenment."},
+  {title:"The Spirit of Tibetan Buddhism",author:"Various",translator:"Sam Van Schaik (selections)",notes:"Covers the history of Buddhism's transmission to Tibet, imperial patronage, and the integration of the three traditions."},
+  {title:"The Hundred Thousand Songs of Milarepa",author:"Milarepa",translator:"Christopher Stagg",notes:"Songs of Tibet's beloved yogi. Illustrates Vajrayana practice, guru devotion, renunciation, and the integration of all three Buddhist traditions."},
+];
+
+function renderTerms() {
+  document.getElementById('termGrid').innerHTML = terms.map((t,i) =>
+    `<div class="term-card" id="tc${i}" onclick="toggleTerm(${i})">
+      <div class="term-name">${t.t}</div>
+      <div class="term-indicator" id="ti${i}">tap to reveal</div>
+      <div class="term-def">${t.d}</div>
+    </div>`
+  ).join('');
+}
+
+function toggleTerm(i) {
+  const card = document.getElementById('tc'+i);
+  const ind = document.getElementById('ti'+i);
+  card.classList.toggle('open');
+  ind.textContent = card.classList.contains('open') ? 'tap to hide' : 'tap to reveal';
+}
+
+// Quiz
+let qIdx=0, score=0, total=0, shuffled=[], answered=false;
+function shuffle(a){return [...a].sort(()=>Math.random()-0.5);}
+
+function getWrongOpts(correct, all) {
+  return shuffle(all.filter(t=>t.t!==correct.t)).slice(0,3).map(t=>t.d);
+}
+
+function loadQuestion() {
+  if (qIdx >= shuffled.length) {
+    document.getElementById('qText').textContent = `Complete! Final score: ${score} / ${total}`;
+    document.getElementById('optionBtns').innerHTML =
+      `<button class="restart-btn" onclick="restartQuiz()" style="grid-column:1/-1;margin:0 auto;">↺ Play again</button>`;
+    document.getElementById('nextBtn').style.display='none';
+    document.getElementById('feedback').textContent='';
+    document.getElementById('progressFill').style.width='100%';
+    return;
+  }
+  answered=false;
+  const item=shuffled[qIdx];
+  document.getElementById('qText').textContent=`Define: "${item.t}"`;
+  document.getElementById('feedback').textContent='';
+  document.getElementById('nextBtn').style.display='none';
+  document.getElementById('progressFill').style.width=`${(qIdx/shuffled.length)*100}%`;
+  const opts=shuffle([item.d,...getWrongOpts(item,terms)]);
+  document.getElementById('optionBtns').innerHTML=opts.map(o=>
+    `<button class="opt" onclick="checkAnswer(this,'${CSS.escape(o)}','${CSS.escape(item.d)}')" data-val="${o.replace(/"/g,'&quot;')}">${o.length>90?o.slice(0,90)+'…':o}</button>`
+  ).join('');
+}
+
+function checkAnswer(btn, chosen, correct) {
+  if(answered)return;
+  answered=true; total++;
+  document.querySelectorAll('.opt').forEach(b=>{b.disabled=true;});
+  const chosenFull=btn.dataset.val;
+  const correctFull=shuffled[qIdx].d;
+  if(chosenFull===correctFull){
+    btn.classList.add('correct'); score++;
+    document.getElementById('feedback').textContent='Correct.';
+    document.getElementById('feedback').style.color='var(--teal)';
+  } else {
+    btn.classList.add('wrong');
+    document.querySelectorAll('.opt').forEach(b=>{if(b.dataset.val===correctFull)b.classList.add('correct');});
+    document.getElementById('feedback').textContent='Not quite — correct answer highlighted.';
+    document.getElementById('feedback').style.color='var(--red)';
+  }
+  document.getElementById('scoreDisplay').textContent=`${score} / ${total}`;
+  document.getElementById('nextBtn').style.display='inline-block';
+}
+
+function nextQuestion(){qIdx++;loadQuestion();}
+
+function restartQuiz(){
+  qIdx=0;score=0;total=0;
+  shuffled=shuffle(terms);
+  document.getElementById('scoreDisplay').textContent='0 / 0';
+  document.getElementById('progressFill').style.width='0%';
+  loadQuestion();
+}
+
+function renderTopics(){
+  document.getElementById('topicList').innerHTML=topics.map(t=>
+    `<div class="topic-item"><div class="topic-title">${t.h}</div><div class="topic-body">${t.p}</div></div>`
+  ).join('');
+}
+
+function renderExam(){
+  document.getElementById('essayList').innerHTML=essayQs.map((e,i)=>
+    `<div class="essay-card" style="margin-bottom:10px;">
+      <p style="margin-bottom:0.75rem;">${e.q}</p>
+      <button class="hint-toggle" onclick="toggleHint(this)">Show outline</button>
+      <ul class="essay-tips" style="display:none;">
+        ${e.tips.map(t=>`<li>${t}</li>`).join('')}
+      </ul>
+    </div>`
+  ).join('');
+
+  document.getElementById('shortAnswerList').innerHTML=shortQs.map((q,i)=>
+    `<div class="short-card">
+      <div class="short-q"><strong style="color:var(--gold-dim);font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.1em;">Q${i+1}</strong><br>${q.q}</div>
+      <button class="hint-toggle" onclick="toggleHint(this)">Show hint</button>
+      <div class="hint-text">${q.h}</div>
+    </div>`
+  ).join('');
+}
+
+function toggleHint(btn){
+  const h=btn.nextElementSibling;
+  if(h.style.display==='none'||!h.style.display){
+    h.style.display= h.tagName==='UL' ? 'block' : 'block';
+    btn.textContent= h.tagName==='UL' ? 'Hide outline' : 'Hide hint';
+  } else {
+    h.style.display='none';
+    btn.textContent= h.tagName==='UL' ? 'Show outline' : 'Show hint';
+  }
+}
+
+function renderTexts(){
+  document.getElementById('textsList').innerHTML=texts.map(t=>
+    `<div class="text-card">
+      <div class="text-title">${t.title}</div>
+      <div class="text-meta">by ${t.author} · trans. ${t.translator}</div>
+      <div class="term-def" style="display:block;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);">${t.notes}</div>
+    </div>`
+  ).join('');
+}
+
+function showTab(id, btn) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if(id==='quiz' && shuffled.length===0) restartQuiz();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+renderTerms();
+renderTopics();
+renderExam();
+renderTexts();
+</script>
+</body>
+</html>
